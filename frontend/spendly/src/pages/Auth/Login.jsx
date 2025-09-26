@@ -1,10 +1,9 @@
 /* eslint-disable no-unused-vars */
-
 import React, { useState } from 'react'
 import AuthLayout from '../../components/layout/AuthLayout'
 import { useNavigate, Link } from 'react-router-dom';
 import Input from '../../components/Inputs/input';
-import { validateEmail } from "../../utils/helper"
+import { validateEmail } from "../../utils/helper";
 
 
 const Login = () => {
