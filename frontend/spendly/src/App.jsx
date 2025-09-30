@@ -12,11 +12,14 @@ import Home from "./pages/Dashboard/Home";
 import Income from "./pages/Dashboard/Income";
 import Expense from "./pages/Dashboard/Expense";
 import UserProvider from './context/UserContext';
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   return (
     <UserProvider>
       <div>
+        <Toaster position="top-center" reverseOrder={false} />
+
         <Router>
           <Routes>
             <Route path='/' element={<Root />} />
