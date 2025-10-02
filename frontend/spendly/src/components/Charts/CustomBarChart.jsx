@@ -11,7 +11,7 @@ import {
   Cell,
 } from "recharts"
 
-const CustomBarChart = ({data}) => {
+const CustomBarChart = ({data, xKey}) => {
 
   // Function to alternate bar colors
   const getBarColor = (index) => {
@@ -20,11 +20,22 @@ const CustomBarChart = ({data}) => {
 
   const CustomToolTip = ({ active, payload }) => {
     if (active && payload && payload.length) {
+      const entry = payload[0].payload;
+
+      // Pick whichever field exists
+      const label = entry.category || entry.source || "";
       return (
         <div className="bg-white shadow-md rounded-lg p-2 border border-gray-300">
-          <p className="text-xs font-semibold text-purple-800 mb-1">{payload[0].payload.category}</p>
+          {label && (
+            <p className="text-xs font-semibold text-purple-800 mb-1">
+              {label}
+            </p>
+          )}
           <p className="text-sm text-gray-600">
-            Amount: <span className="text-sm font-medium text-gray-900">${payload[0].payload.amount}</span>
+            Amount:{" "}
+            <span className="text-sm font-medium text-gray-900">
+              ${entry.amount}
+            </span>
           </p>
         </div>
       );
@@ -38,7 +49,7 @@ const CustomBarChart = ({data}) => {
         <BarChart data={data}>
           <CartesianGrid stroke="none" />
 
-          <XAxis dataKey="category" tick={{ fontSize: 12, fill: "#555"}} stroke="none" />
+          <XAxis dataKey={xKey} tick={{ fontSize: 12, fill: "#555"}} stroke="none" />
           <YAxis tick={{ fontSize: 12, fill: "#555" }} stroke="none" />
 
           <Tooltip content={CustomToolTip} />
