@@ -40,13 +40,18 @@ const CustomPieChart = ({
         <>
           <text
             x="50%"
-            y="50%"
+            y={label.includes('\n') ? "38%" : "43%"} // lower y is for 2 lines, upper y is for 1 line
             dy={-25}
             textAnchor="middle"
             fill='#666'
             fontSize="14px"
+            className="mb-2"
           >
-            {label}
+            {label.split('\n').map((line, idx) => (
+              <tspan x="50%" dy={idx === 0 ? 0 : 18} key={idx}>
+                {line}
+              </tspan>
+            ))}
           </text>
           <text
             x="50%"
