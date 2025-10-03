@@ -27,7 +27,7 @@ export const addThousandsSeparator = (num) => {
   return fractionalPart
     ? `${formattedInteger}.${fractionalPart}`
     : formattedInteger;
-}
+};
 
 export const prepareExpenseBarChartData = (data = []) => {
   const grouped = {};
@@ -47,7 +47,7 @@ export const prepareExpenseBarChartData = (data = []) => {
   chartData.sort((a, b) => moment(a.month, "Do MMM") - moment(b.month, "Do MMM"));
 
   return chartData;
-}
+};
 
 export const prepareIncomeBarChartData = (data = []) => {
   const sortedData = [...data].sort((a,b) => new Date(a.date) - new Date(b.date));
@@ -59,4 +59,16 @@ export const prepareIncomeBarChartData = (data = []) => {
   }));
 
   return chartData;
-}
+};
+
+export const prepareExpenseLineChartData = (data = []) => {
+  const sortedData = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
+
+  const chartData = sortedData.map((item) => ({
+    date: moment(item?.date).format("Do MMM"),
+    amount: item?.amount,
+    category: item?.category,
+  }));
+
+  return chartData;
+};
